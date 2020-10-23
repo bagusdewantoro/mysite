@@ -1,5 +1,6 @@
 *.pyc
 *~
+*.log
 /.vscode
 __pycache__
 db.sqlite3
