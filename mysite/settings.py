@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 # Send emails with Django
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'crazydinosaur86@gmail.com'
 EMAIL_HOST_PASSWORD = 'Guitarra-1'

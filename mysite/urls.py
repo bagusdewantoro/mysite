@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog.views import langsung_blog
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace = 'blog')),
+    path("", langsung_blog), # Supaya dari url utama bisa redirect ke /blog/
 ]

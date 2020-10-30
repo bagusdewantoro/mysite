@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage, \
                                     PageNotAnInteger
@@ -66,3 +66,7 @@ def post_share(request, post_id):
     return render(request, 'blog/post/share.html', {'post': post,
                                                     'form': form,
                                                     'sent': sent})
+# Supaya dari url utama bisa redirect ke /blog/
+def langsung_blog(request):
+    response = redirect('blog/')
+    return response
