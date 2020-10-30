@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Bagikan konten{% endblock %}
+
+{% block content %}
+  {% if sent %}
+    <h1>Email terkirim</h1>
+    <p>
+      "{{ post.title }}" sudah terkirim ke {{ form.cleaned_data.to }}.
+    </p>
+  {% else %}
+    <h1>Bagikan "{{ post.title }}" melalui email</h1>
+    <form method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="submit" value="Kirim email">
+    </form>
+  {% endif %}
+{% endblock %}
