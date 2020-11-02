@@ -1,11 +1,11 @@
 {% extends  "blog/base.html" %}
 
-{% block title %}{{ post.title }}{% endblock %}
+{% block title %}{{ post.judul }}{% endblock %}
 
 {% block content %}
-  <h1>{{ post.title }}</h1>
+  <h1>{{ post.judul }}</h1>
   <p class = "date">
-    Dimuat pada {{ post.publish }} oleh {{ post.author }}
+    Dimuat pada {{ post.terbit }} oleh {{ post.penulis }}. Kategori = "{{ post.kategori }}"
   </p>
   {{ post.body|linebreaks }}
   <a href="{% url "blog:post_share" post.id %}">

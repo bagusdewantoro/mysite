@@ -3,10 +3,10 @@ from .models import Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'author', 'publish', 'status')
-    list_filter = ('status', 'created', 'publish', 'author')
-    search_fields = ('title', 'body')
-    prepopulated_fields = {'slug' : ('title',)}
-    raw_id_fields = ('author',)
-    date_hierarchy = 'publish'
-    ordering = ('status', 'publish', 'title')
+    list_display = ('judul', 'slug', 'kategori', 'penulis', 'terbit', 'status')
+    list_filter = ('status', 'dibuat', 'terbit', 'penulis', 'kategori')
+    search_fields = ('judul', 'body', 'kategori')
+    prepopulated_fields = {'slug' : ('judul',)}
+    raw_id_fields = ('penulis',)
+    date_hierarchy = 'terbit'
+    ordering = ('status', 'terbit', 'judul', 'kategori')

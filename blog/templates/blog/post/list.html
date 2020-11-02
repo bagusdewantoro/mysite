@@ -7,11 +7,11 @@
   {% for post in posts %}
     <h2>
       <a href="{{ post.get_absolute_url }}">
-        {{ post.title }}
+        {{ post.judul }}
       </a>
     </h2>
     <p class="date">
-      Dimuat pada {{ post.publish }} oleh {{ post.author }}
+      Dimuat pada {{ post.terbit }} oleh {{ post.penulis }}. Kategori = "{{ post.kategori }}"
     </p>
     {{ post.body|truncatewords:30|linebreaks }}
   {% endfor %}
