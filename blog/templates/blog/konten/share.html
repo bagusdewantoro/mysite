@@ -6,10 +6,10 @@
   {% if sent %}
     <h1>Email terkirim</h1>
     <p>
-      "{{ post.judul }}" sudah terkirim ke {{ form.cleaned_data.to }}.
+      "{{ konten.judul }}" sudah terkirim ke {{ form.cleaned_data.email_penerima }}.
     </p>
   {% else %}
-    <h1>Bagikan "{{ post.judul }}" melalui email</h1>
+    <h1>Bagikan "{{ konten.judul }}" melalui email</h1>
     <form method="post">
       {{ form.as_p }}
       {% csrf_token %}

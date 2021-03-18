@@ -1,72 +1,77 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Konten
 from django.core.paginator import Paginator, EmptyPage, \
                                     PageNotAnInteger
 from django.views.generic import ListView
-from .forms import EmailPostForm
+from .forms import EmailKontenForm
 from django.core.mail import send_mail
 
-
-class PostListView(ListView):
-    queryset = Post.dimuat.all()
-    context_object_name = 'posts'
+# List View dengan class based view:
+"""
+class KontenListView(ListView):
+    queryset = Konten.dimuat.all()
+    context_object_name = 'kontenSemua'
     paginate_by = 3
-    template_name = 'blog/post/list.html'
+    template_name = 'blog/konten/list.html'
+"""
 
-def post_list(request):
-    object_list = Post.dimuat.all()
-    paginator = Paginator(object_list, 3) # 3 posts in each page
-    page = request.GET.get('page')
+# List View dengan function based view:
+def konten_list(request):
+    object_list = Konten.dimuat.all()
+    paginator = Paginator(object_list, 3) # 3 kontenSemua in each page
+    halaman = request.GET.get('halaman')
     try:
-        posts = paginator.page(page)
+        kontenSemua = paginator.page(halaman)
     except PageNotAnInteger:
         # If page is not an integer, deliver the first page
-        posts = paginator.page(1)
+        kontenSemua = paginator.page(1)
     except EmptyPage:
         # If page is out of range, deliver last page of results
-        posts = paginator.page(paginator.num_pages)
+        kontenSemua = paginator.page(paginator.num_pages)
     return render(request,
-                    'blog/post/list.html',
-                    {'page': page,
-                    'posts' : posts})
+                    'blog/konten/list.html',
+                    {'halaman': halaman,
+                    'kontenSemua' : kontenSemua})
 
-def post_detail(request, year, month, day, post):
-    post = get_object_or_404(Post, slug = post,
+
+def konten_detail(request, year, month, day, konten):
+    konten = get_object_or_404(Konten, slug = konten,
                                     status = 'dimuat',
                                     terbit__year = year,
                                     terbit__month = month,
                                     terbit__day = day)
     return render(request,
-                'blog/post/detail.html',
-                {'post' : post})
+                'blog/konten/detail.html',
+                {'konten' : konten})
 
-def post_share(request, post_id):
-    # Retrieve post by id
-    post = get_object_or_404(Post, id=post_id, status='dimuat')
+def konten_share(request, konten_id):
+    # Retrieve konten by id
+    konten = get_object_or_404(Konten, id=konten_id, status='dimuat')
     sent = False
 
     if request.method == 'POST':
         # Form was submitted
-        form = EmailPostForm(request.POST)
+        form = EmailKontenForm(request.POST)
         if form.is_valid():
             # Form fields passed validation
             cd = form.cleaned_data
-            post_url = request.build_absolute_uri(
-                post.get_absolute_url())
-            subject = f"{cd['name']} merekomendasikanmu untuk membaca " \
-                    f"{post.judul}"
-            message = f"Baca {post.judul} pada {post_url}\n\n" \
-                    f"Komentar dari {cd['name']}: {cd['comments']}"
+            konten_url = request.build_absolute_uri(
+                konten.get_absolute_url())
+            subject = f"{cd['nama']} merekomendasikanmu untuk membaca " \
+                    f"{konten.judul}"
+            message = f"Baca {konten.judul} pada {konten_url}\n\n" \
+                    f"Komentar dari {cd['nama']}: {cd['catatan']}"
             send_mail(subject, message, 'crazydinosaur86@gmail.com',
-                    [cd['to']])
+                    [cd['email_pengirim']])
             sent = True
 
     else:
-        form = EmailPostForm()
-    return render(request, 'blog/post/share.html', {'post': post,
+        form = EmailKontenForm()
+    return render(request, 'blog/konten/share.html', {'konten': konten,
                                                     'form': form,
                                                     'sent': sent})
-# Supaya dari url utama bisa redirect ke /blog/
+
+# Ini cara pertama untuk redirect ke blog/ :
 def langsung_blog(request):
     response = redirect('blog/')
     return response

@@ -1,0 +1,14 @@
+{% extends  "blog/base.html" %}
+
+{% block title %}{{ konten.judul }}{% endblock %}
+
+{% block content %}
+  <h1>{{ konten.judul }}</h1>
+  <p class = "date">
+    Dimuat pada {{ konten.terbit }} oleh {{ konten.penulis }}. Kategori = "{{ konten.kategori }}"
+  </p>
+  {{ konten.body|linebreaks }}
+  <a href="{% url "blog:konten_share" konten.id %}">
+    Bagikan konten
+  </a>
+{% endblock %}

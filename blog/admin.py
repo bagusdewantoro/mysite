@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Post
+from .models import Konten
 
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+@admin.register(Konten)
+class KontenAdmin(admin.ModelAdmin):
     list_display = ('judul', 'slug', 'kategori', 'penulis', 'terbit', 'status')
     list_filter = ('status', 'dibuat', 'terbit', 'penulis', 'kategori')
     search_fields = ('judul', 'body', 'kategori')

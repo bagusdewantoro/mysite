@@ -4,11 +4,10 @@ from . import views
 app_name = 'blog'
 
 urlpatterns = [
-    # post views
-    # path('', views.post_list, name = 'post_list'),
-    path('', views.PostListView.as_view(), name='post_list'),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/',
-        views.post_detail, name = 'post_detail'),
-    path('<int:post_id>/share/',
-        views.post_share, name = 'post_share'),
+    path('', views.konten_list, name = 'konten_list'),   # Function Based View
+    #path('', views.KontenListView.as_view(), name='konten_list'),    # Class Based View
+    path('<int:year>/<int:month>/<int:day>/<slug:konten>/',
+        views.konten_detail, name = 'konten_detail'),
+    path('<int:konten_id>/share/',
+        views.konten_share, name = 'konten_share'),
 ]

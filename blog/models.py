@@ -11,7 +11,7 @@ class PublishedManager(models.Manager):
                         .filter(status='dimuat')
 
 
-class Post(models.Model):
+class Konten(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('dimuat', 'Dimuat'),
@@ -42,7 +42,7 @@ class Post(models.Model):
     dimuat = PublishedManager()   # Our custom manager.
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
+        return reverse('blog:konten_detail',
                         args = [self.terbit.year,
                                 self.terbit.month,
                                 self.terbit.day,

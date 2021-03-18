@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Bagus Dewantoro{% endblock %}
+
+{% block content %}
+  <h1>Bagus Dewantoro</h1>
+  {% for konten in kontenSemua %}
+    <h2>
+      <a href="{{ konten.get_absolute_url }}">
+        {{ konten.judul }}
+      </a>
+    </h2>
+    <p class="date">
+      Dimuat pada {{ konten.terbit }} oleh {{ konten.penulis }}. Kategori = "{{ konten.kategori }}"
+    </p>
+    {{ konten.body|truncatewords:30|linebreaks }}
+  {% endfor %}
+  <!-- {% include "pagination.html" with halaman=halaman_obj %} -->   <!-- Class based view -->
+  {% include "pagination.html" with halaman=kontenSemua %}    <!-- Function based view -->
+{% endblock %}

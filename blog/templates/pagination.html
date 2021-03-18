@@ -1,13 +1,14 @@
 <div class="pagination">
   <span class="step-links">
-    {% if page.has_previous %}
-      <a href="?page={{ page.previous_page_number }}">Sebelumnya</a>
+    {% if halaman.has_previous %}
+      <a href="?halaman={{ halaman.previous_page_number }}">Sebelumnya</a>
     {% endif %}
     <span class="current">
-      Halaman {{ page.number }} dari {{ page.paginator.num_pages }}.
+      Halaman {{ halaman.number }} dari {{ halaman.paginator.num_pages }}.
     </span>
-    {% if page.has_next %}
-      <a href="?page={{ page.next_page_number }}">Berikutnya</a>
+    {% if halaman.has_next %}
+      <a href="?halaman={{ halaman.next_page_number }}">Berikutnya</a>
     {% endif %}
   </span>
 </div>
+  
