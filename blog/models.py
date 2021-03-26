@@ -34,6 +34,7 @@ class Konten(models.Model):
 
     class Meta:
         ordering = ('-terbit',)
+        verbose_name_plural = 'Seluruh Konten'
 
     def __str__(self):
         return self.judul
@@ -47,3 +48,20 @@ class Konten(models.Model):
                                 self.terbit.month,
                                 self.terbit.day,
                                 self.slug])
+
+class Komentar(models.Model):
+    konten = models.ForeignKey(Konten, on_delete=models.CASCADE,
+                                        related_name='seluruh_komentar')
+    nama = models.CharField(max_length=80)
+    email = models.EmailField()
+    isi = models.TextField()
+    dibuat = models.DateTimeField(auto_now_add=True)
+    diperbarui = models.DateTimeField(auto_now=True)
+    aktif = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('dibuat',)
+        verbose_name_plural = 'Seluruh Komentar'
+
+    def __str__(self):
+        return f'Komentar dari {self.nama} pada {self.konten}'

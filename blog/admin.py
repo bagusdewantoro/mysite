@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Konten
+from .models import Konten, Komentar
 
 @admin.register(Konten)
 class KontenAdmin(admin.ModelAdmin):
@@ -10,3 +10,9 @@ class KontenAdmin(admin.ModelAdmin):
     raw_id_fields = ('penulis',)
     date_hierarchy = 'terbit'
     ordering = ('status', 'terbit', 'judul', 'kategori')
+
+@admin.register(Komentar)
+class KomentarAdmin(admin.ModelAdmin):
+    list_display = ('nama', 'email', 'konten', 'dibuat', 'aktif')
+    list_filter = ('aktif', 'dibuat', 'diperbarui')
+    search_fields = ('nama', 'email', 'isi')
